@@ -45,9 +45,12 @@
                     <li>
                         <a href="" class="btn btn-outline btn-primary"> <i class="fa-solid fa-book-open"></i> Learn</a>
                     </li>
-                    <li>
-                        <a href="" class="btn btn-outline btn-primary"> <i
-                                class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                    <li id="navbar-logout" class="hidden">
+                        <button onclick="handleLogout()" class="btn btn-outline btn-primary"> <i
+                                class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
+                    </li>
+                    <li id="navbar-user" class="hidden">
+                        <span class="btn btn-success text-white pointer-events-none"><i class="fa-solid fa-circle-user"></i> Logged In</span>
                     </li>
                 </ul>
                 <!-- Hamburger menu (visible only on small screens) -->
@@ -69,8 +72,8 @@
                             <a href="" class=""> <i class="fa-solid fa-book-open"></i>
                                 Learn</a>
                         </li>
-                        <li>
-                            <a href="" class=""> <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                        <li id="mobile-logout" class="hidden">
+                            <button onclick="handleLogout()" class=""> <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
                         </li>
                     </ul>
                 </div>
@@ -89,28 +92,37 @@
                 অন্য একটি Level এ
             </p>
             <div class="form flex flex-col gap-4">
-                <input type="email" class="input border border-[#181b1b]/20 focus: outline-none"
-                    placeholder="Enter Your Name" />
-                <input type="password" class="input  border border-[#181b1b]/20 focus: outline-none"
+                <input id="login-email" type="email" class="input border border-[#181b1b]/20 focus:outline-none"
+                    placeholder="Email Address" />
+                <input id="login-password" type="password" class="input border border-[#181b1b]/20 focus:outline-none"
                     placeholder="Password" />
             </div>
-            <button class="btn btn-primary">Get Started</button>
+            <!-- Demo Credentials Info Box -->
+            <div class="bg-[#BADEFF]/40 border border-[#00bcff]/40 rounded-xl px-5 py-3 text-sm space-y-1">
+                <p class="font-semibold text-[#18181b]">🔐 Demo Credentials:</p>
+                <p>📧 <span class="font-mono font-medium">abc123@gmail.com</span></p>
+                <p>🔑 <span class="font-mono font-medium">12345</span></p>
+            </div>
+            <div id="login-error" class="hidden bg-red-100 border border-red-300 text-red-700 rounded-xl px-5 py-3 text-sm font-medium">
+                ❌ ভুল Email বা Password! আবার চেষ্টা করুন।
+            </div>
+            <button onclick="handleLogin()" class="btn btn-primary">Get Started</button>
         </div>
         <div class="image flex-1">
             <img src="assets/hero-student.png" alt="">
         </div>
     </section>
-    <!-- Main section -->
-    <section class="main-section w-11/12 mx-auto text-center">
+    <!-- Main section (hidden until login) -->
+    <section id="main-section" class="main-section w-11/12 mx-auto text-center hidden">
         <h2 class="font-bold text-[36px] mb-8"><span class="text-[#00bcff]">Let's</span> Learn Vocabularies</h2>
         <div id="level-container" class="flex gap-5 flex-wrap justify-center mb-6">
         </div>
     </section>
-    <section class="flex justify-center items-center w-11/12 mx-auto">
+    <section id="search-section" class="flex justify-center items-center w-11/12 mx-auto hidden">
         <div class="flex gap-3">
             <div>
                 <input id="input-search" type="text" placeholder="Search Vocabulary"
-                    class="input border border-[#181b1b]/20 focus: outline-none" required />
+                    class="input border border-[#181b1b]/20 focus:outline-none" required />
             </div>
             <button id="btn-search" class="btn btn-primary">Search</button>
         </div>
@@ -119,10 +131,19 @@
         <span class="loading loading-infinity loading-xl"></span>
     </section>
     <section id="word-container"
-        class="bg-gray-100 p-10 w-11/12 mx-auto my-10 grid md:grid-cols-2 lg:grid-cols-3 gap-4 rounded-xl">
+        class="bg-gray-100 p-10 w-11/12 mx-auto my-10 grid md:grid-cols-2 lg:grid-cols-3 gap-4 rounded-xl hidden">
         <div class="text-center col-span-full">
             <p class="font-bangla text-[15px] text-[#79716B]">আপনি এখনো কোন Lesson Select করেন নি</p>
             <p class="font-bangla font-medium text-[35px] text-[#292524]">একটি Lesson Select করুন।</p>
+        </div>
+    </section>
+    <!-- Saved Words Section -->
+    <section id="saved-section" class="w-11/12 mx-auto my-6 hidden">
+        <h2 class="font-bold text-[28px] mb-6 text-center">❤️ <span class="text-[#00bcff]">Saved</span> Words</h2>
+        <div id="saved-word-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="text-center col-span-full">
+                <p class="font-bangla text-[#79716B] text-[18px]">এখনো কোন Word save করা হয়নি।</p>
+            </div>
         </div>
     </section>
     <dialog id="my_modal_1" class="modal">
