@@ -1,3 +1,7 @@
+const createElement = (arr) =>{
+    const htmlElement = arr.map((el) => `<span class="btn bg-[#BADEFF]/50 hover:bg-[#BADEFF]">${el}</span>`);
+    return (htmlElement.join(" "))
+}
 const loadLessons = ()=>{
     fetch("https://openapi.programming-hero.com/api/levels/all")
     .then((res) => res.json())
@@ -6,27 +10,41 @@ const loadLessons = ()=>{
 
 const loadLevelData = (id)=>{
     const url = `https://openapi.programming-hero.com/api/level/${id}`
-    // console.log(url)
     fetch(url)
     .then(res => res.json())
     .then(data => {
         removeActive()
         const clickedBtn = document.getElementById(`lesson-btn-${id}`)
-        // console.log(clickedBtn)
         clickedBtn.classList.add("active")
         displayLevelWord(data.data)
     })
 }
-
 const loadWordDetails = async (id)=>{
     const url = `https://openapi.programming-hero.com/api/word/${id}`
-    console.log(url)
     const res = await fetch(url);
     const details = await res.json();
     displayDetail(details.data)
 }
 const displayDetail = (word)=>{
-    console.log(word)
+    const detailsContainer= document.getElementById("details-container")
+    document.getElementById("my_modal_1").showModal()
+    detailsContainer.innerHTML =`
+    <p class="font-semibold text-[30px]">${word.word}(<i class="fa-solid fa-microphone-lines" style="color: rgb(0, 0, 0);"></i>: <span>${word.pronunciation}</span> )</p>
+        <div class="space-y-2">
+            <p class="font-semibold text-2xl">Meaning</p>
+            <p class="font-bangla text-xl">${word.meaning}</p>
+        </div>
+        <div class="space-y-2">
+            <p class="font-semibold text-2xl">Example</p>
+            <p class="text-xl text-[#000000]">${word.sentence}</p>
+        </div>
+        <div class="space-y-2">
+            <p>সমার্থক শব্দ গুলো</p>
+            <div class="flex gap-3">
+                ${createElement(word.synonyms)}
+            </div>
+        </div>
+    `
 }
 const removeActive = ()=>{
     const lessonBtn = document.querySelectorAll('.lesson-btn')
@@ -68,7 +86,6 @@ const displayLevelWord = (words)=>{
     wordContainer.append(card)
     })
 }
-
 const displayLessons = (lessons)=>{
     const levelContainer = document.getElementById("level-container")
     levelContainer.innerHTML = "";
