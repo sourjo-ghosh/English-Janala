@@ -135,7 +135,6 @@ btnSearch.addEventListener('click', ()=>{
     .then((data) => {
         const allWords = data.data;
         const filterWords = allWords.filter(word => word.word.toLowerCase().includes(searchValue))
-        console.log(filterWords)
         displayLevelWord(filterWords)
     })
 
