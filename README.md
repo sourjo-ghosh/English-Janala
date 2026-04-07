@@ -5,6 +5,7 @@ Start your English learning journey with **English Janala** - an interactive and
 **🌐 Live Link:** [english-janala-drab.vercel.app](https://english-janala-drab.vercel.app/)
 
 ---
+<img width="1440" height="779" alt="Screenshot From 2026-04-07 21-49-45" src="https://github.com/user-attachments/assets/df37e9ac-d5d4-4f4e-bf4a-e0c009101a97" />
 
 ## 📋 Project Overview
 
